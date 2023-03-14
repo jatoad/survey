@@ -1,6 +1,5 @@
 import gspread
 from google.oauth2.service_account import Credentials
-from pprint import pprint
 
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -14,7 +13,6 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('survey')
 
 
-
 def survey_structure():
     """
     survey overall structure
@@ -25,7 +23,6 @@ def survey_structure():
     print("example: 7 \n")
 
 
-
 def get_questions():
     """
     gets questions from each colum
@@ -34,7 +31,8 @@ def get_questions():
     question = SHEET.worksheet("questions").get_all_values()
     for col in question:
         print(col)
-        answer = input("enter answer here:")
+        answer = int(input("Enter Answer Here:"))
+        print(answer)
 
 
 def validate_answer():
@@ -42,10 +40,12 @@ def validate_answer():
     """
 
 
-
 def main():
+    """
+    calls all functions in one 
+    """
     survey_structure()
-    get_questions()    
+    get_questions()
 
 
 main()
