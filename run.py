@@ -24,12 +24,28 @@ def survey_structure():
     print("provide answers in a scale of 1-10, where 5 is the average")
     print("example: 7 \n")
 
+
+
 def get_questions():
+    """
+    gets questions from each colum
+    iterates over each colum and produces answer box 
+    """
     question = SHEET.worksheet("questions").get_all_values()
     for col in question:
-        pprint(question)
-    answer = input("enter answer here:")
+        print(col)
+        answer = input("enter answer here:")
 
 
-survey_structure()
-get_questions()    
+def validate_answer():
+    """
+    """
+
+
+
+def main():
+    survey_structure()
+    get_questions()    
+
+
+main()
