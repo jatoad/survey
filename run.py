@@ -26,13 +26,21 @@ def survey_structure():
 def get_questions():
     """
     gets questions from each colum
-    iterates over each colum and produces answer box 
+    iterates over each colum and produces answer box
+    adds input and returns  
     """
     question = SHEET.worksheet("questions").get_all_values()
+    
+    question_number = 0
+    
+    responses = []
+    
     for col in question:
-        print(col)
+        question_number += 1
+        print(f"\n Question {question_number}:{col}?")
         answer = int(input("Enter Answer Here:"))
-        print(answer)
+        responses.append(answer)
+    # print(f"\n your responses:\n{responses}")     
 
 
 def validate_answer():
@@ -42,7 +50,7 @@ def validate_answer():
 
 def main():
     """
-    calls all functions in one 
+    calls all functions in one main function
     """
     survey_structure()
     get_questions()
