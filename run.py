@@ -40,13 +40,36 @@ def get_questions():
         print(f"\n Question {question_number}:{col}?")
         answer = int(input("Enter Answer Here:"))
         responses.append(answer)
-    # print(f"\n your responses:\n{responses}")     
+        # validate_answer(answer)
+    return responses
+     
+
+# def validate_answer(value):
+#     """
+#     checks that answer is an integer and returns custom error message 
+#     checks that number is between 1 and 10 and returns custom error message   
+#     """
+#     try:
+#         if 1 <= value >= 11:
+#             raise ValueError(
+#                 f"response should be in range 1-10. you replied {value}"
+#             )
+#     except ValueError as e:
+#         print(f"incorrect data. you entered: {e} ")
 
 
-def validate_answer():
+def store_response():
     """
+    takes submitted answers from responses variable
+    adds responses to spreadseet
+    aligns responses with corresponding question 
     """
 
+def average_responses():
+    """
+    takes all responses submitted by each user and finds average for each question
+    """        
+           
 
 def main():
     """
