@@ -45,7 +45,7 @@ def get_questions():
             answer = input("Enter Answer Here:")
         # must be int so convert
         responses_str.append(int(answer))
-    store_response(responses_str)
+    return (responses_str)
 
     
 def answer_is_valid(value):
@@ -84,7 +84,8 @@ def main():
     calls all functions in one main function
     """
     survey_structure()
-    get_questions()
+    user_results = get_questions()
+    store_response(user_results)
 
 
 main()
