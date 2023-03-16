@@ -26,6 +26,7 @@ def survey_structure():
 def get_questions():
     """
     gets questions from each colum
+    allows uder to enter name
     iterates over each colum and produces answer box
     adds input and returns  
     """
@@ -33,41 +34,48 @@ def get_questions():
     
     question_number = 0
     
-    responses = []
-    
+    responses_str = []
+    name = input("enter name here:")
+    responses_str.append(name)
     for col in question:
         question_number += 1
         print(f"\n Question {question_number}:{col}?")
-        answer = int(input("Enter Answer Here:"))
-        responses.append(answer)
-        # validate_answer(answer)
-    return responses
-     
+        answer = input("Enter Answer Here:")
+        while (not answer_is_valid(answer)):
+            answer = input("Enter Answer Here:")
+        # must be int so convert
+        responses_str.append(int(answer))
+    store_response(responses_str)
 
-# def validate_answer(value):
-#     """
-#     checks that answer is an integer and returns custom error message 
-#     checks that number is between 1 and 10 and returns custom error message   
-#     """
-#     try:
-#         if 1 <= value >= 11:
-#             raise ValueError(
-#                 f"response should be in range 1-10. you replied {value}"
-#             )
-#     except ValueError as e:
-#         print(f"incorrect data. you entered: {e} ")
-
-
-def store_response():
+    
+def answer_is_valid(value):
     """
+    checks that answer is an integer and returns custom error message 
+    checks that number is between 1 and 10 and returns custom error message   
+    """
+    try:
+        if not value.isdigit() or 1 <= int(value) >= 11:
+            raise ValueError
+    except ValueError:
+        print(f"response should be in range 1-10. you replied {value}")
+        return False
+    return True
+
+
+def store_response(data):
+    """ 
     takes submitted answers from responses variable
     adds responses to spreadseet
     aligns responses with corresponding question 
     """
+    print("processing results...")
+    add_to_worksheet = SHEET.worksheet("questions")
+    add_to_worksheet.append_row(data) 
+
 
 def average_responses():
     """
-    takes all responses submitted by each user and finds average for each question
+    takes responses submitted by each user and finds average for each question
     """        
            
 
