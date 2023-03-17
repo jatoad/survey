@@ -10,7 +10,7 @@ SCOPE = [
 CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
-SHEET = GSPREAD_CLIENT.open('questionnaire')
+SHEET = GSPREAD_CLIENT.open('survey')
 
 
 def survey_structure():
@@ -19,7 +19,7 @@ def survey_structure():
     prints instructions of the survey 
     """
     print("please fill out all questons in survey")
-    print("provide answers in a scale of 1-10, where 5 is the average")
+    print("provide answers in a scale of 1-7")
     print("example: 7 \n")
 
 
@@ -35,7 +35,7 @@ def get_questions():
     question_number = 0
     
     responses_str = []
-    name = input("enter name here:")
+    name = input(" To begin, enter name here:")
     responses_str.append(name)
     for col in question:
         question_number += 1
@@ -45,7 +45,8 @@ def get_questions():
             answer = input("Enter Answer Here:")
         # must be int so convert
         responses_str.append(int(answer))
-    return (responses_str)
+    print(responses_str)    
+    return responses_str
 
     
 def answer_is_valid(value):
@@ -54,10 +55,10 @@ def answer_is_valid(value):
     checks that number is between 1 and 10 and returns custom error message   
     """
     try:
-        if not value.isdigit() or 1 <= int(value) >= 11:
+        if not value.isdigit() or 1 <= int(value) >= 8:
             raise ValueError
     except ValueError:
-        print(f"response should be in range 1-10. you replied {value}")
+        print(f"Response should be in range 1-7. you replied {value}")
         return False
     return True
 
@@ -68,16 +69,21 @@ def store_response(data):
     adds responses to spreadseet
     aligns responses with corresponding question 
     """
-    print("processing results...")
-    add_to_worksheet = SHEET.worksheet("questions")
+    print("Processing results...")
+    add_to_worksheet = SHEET.worksheet("users")
     add_to_worksheet.append_row(data) 
 
 
-def average_responses():
+def average_responses(data):
     """
     takes responses submitted by each user and finds average for each question
-    """        
-           
+    """   
+    all_answers = data[1:-1]
+    all_answers.append(data[-1])
+    avg = sum(all_answers) // len(all_answers)
+    data.append(avg)
+    return data
+    
 
 def main():
     """
@@ -85,7 +91,9 @@ def main():
     """
     survey_structure()
     user_results = get_questions()
-    store_response(user_results)
+    all_data = average_responses(user_results)
+    store_response(all_data)
 
 
+print(" \nwelcome to our health and fitness survey \n")
 main()
