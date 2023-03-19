@@ -26,8 +26,25 @@ this will loop the question until the correct data is submitted by the user, whe
 - once all questions are filled in and answered the terminal prints a response, using the username provided to at the beginng 
 - a list of answers submitted
 - the average score 
-- message 
+- message printed(determined bt the average score of the user)
 
+### - spreadseet data
+![screen shot of questions in spreadsheeet](/images/spreadsheet_questions.png)
+- all questions in spreadsheet
+![screen shot of questions in spreadsheeet](/images/user_data.png)
+- responses, average and username submitted by user added to page on spreadsheet 
+
+## Bug Fixes 
+- error message qould only print correctly if it was correct data type and not in range. if, for example a letter was supplied fot the question answer, the programme would break its loop. this was fixed by changing the exception handler to treat all errors the amse and provide a univeral response for everything. in the future i would like to add seperate responses for the different errors, however at this moment i was unabke to get it working
+- during the process of the project my computer crashed and uninstalled the google auth and gspread from the file, which caused the code to be unable to import them. I was able to identify this after trialing a range of probable causes for the error and re-install to get the project running again 
+
+## - Testing the code 
+- ran the code through the PEP8 linter and no major errors were flagged
+- used print statements throughout the code to identify if functions and processes were working in the intended way
+- went through different invalid inputs to see what each would do to the programme
+
+## - Future Additions
+- in the future i would like to add a feature that will alow the user to change answers if needed
 
 
 
