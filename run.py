@@ -13,9 +13,8 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('survey')
 
 
-def survey_structure():
+def survey_instrictions():
     """
-    survey overall structure
     prints instructions of the survey 
     """
     print("please fill out all questons in survey")
@@ -113,7 +112,7 @@ def main():
     """
     calls all functions in one main function
     """
-    survey_structure()
+    survey_instrictions()
     user_results = get_questions()
     all_data = add_average_of_user_respones(user_results)
     store_response(all_data)
